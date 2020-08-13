@@ -46,3 +46,21 @@ authors и books по полю author_id.
 authors_price = pd.merge(authors, books, on='author_id')
 print(authors_price)
 print("\n")
+
+
+
+
+"""
+Задание 3
+
+Создайте датафрейм top5, в котором содержатся строки
+из authors_price с пятью самыми дорогими книгами.
+"""
+
+
+top5 = authors_price.sort_values('price', ascending=False).head(5)
+print(top5)
+print("\n")
+
+
+
