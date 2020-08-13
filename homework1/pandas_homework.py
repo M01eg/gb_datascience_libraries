@@ -64,3 +64,30 @@ print("\n")
 
 
 
+
+"""
+Задание 4
+
+Создайте датафрейм authors_stat на основе информации из
+authors_price. В датафрейме authors_stat должны быть
+четыре столбца:
+
+author_name, min_price, max_price и mean_price,
+
+в которых должны содержаться соответственно имя автора,
+минимальная, максимальная и средняя цена на книги этого
+автора.
+"""
+
+authors_min_price  = authors_price.groupby('author_name').agg({'price': 'min'})
+authors_max_price  = authors_price.groupby('author_name').agg({'price': 'max'})
+authors_mean_price = authors_price.groupby('author_name').agg({'price': 'mean'})
+
+authors_stat = pd.merge(pd.merge(authors_min_price.rename(columns={'price': 'min_price'}),
+                                 authors_max_price.rename(columns={'price': 'max_price'}),
+                                 on='author_name'),
+                        authors_mean_price.rename(columns={'price': 'mean_price'}),
+                        on='author_name')
+
+print(authors_stat)
+print("\n")
